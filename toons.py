@@ -9,6 +9,7 @@ import sqlite3
 FIRST_YEAR = 1930
 LAST_YEAR = 1988
 SQL_BASE = 'SELECT * FROM WB '
+MAX_TITLE_LENGTH = 28
 
 def showMenu():
     show = True
@@ -118,11 +119,15 @@ def showTableFields():
 
 def showRecords(recordset):
     print '-'*80
-    count = 0
-    size = len(recordset)
+    # count = 0
+    # size = len(recordset)
     for record in recordset:
         lineText = " " + str(record[0]).ljust(5) # ID
-        lineText += record[1].ljust(31) # Title
+	if len(record[1]) > MAX_TITLE_LENGTH:
+            title = record[1][:MAX_TITLE_LENGTH] 
+        else:
+            title = record[1] 
+        lineText += title.ljust(31) # Title
         lineText += record[6].split()[-1].ljust(10) # Director
         lineText += record[8].ljust(12) # Release Date
         lineText += record[2].ljust(18) # Char1
@@ -144,12 +149,12 @@ def showRecords(recordset):
             lineText = " "*59 + record[5] # Char4
             print lineText
         print '-'*80
-	count += 1
-        size -= 1
-	if count > 11 and size > 0:
-	    raw_input("\nPress ENTER to view next set of records ")
-	    count = 0
-	    print '\n' + '-'*80
+	# count += 1
+        # size -= 1
+	# if count > 11 and size > 0:
+	#     raw_input("\nPress ENTER to view next set of records ")
+	#     count = 0
+	#     print '\n' + '-'*80
 
 def exeSQL(sql):
     try:
