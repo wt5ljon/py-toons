@@ -134,7 +134,8 @@ def showRecords(recordset):
         lineText += record[7] # Type
         print lineText
         lineText = " "*6 + record[13].ljust(31) # Source
-        lineText += str(record[14]).ljust(10) # Rating
+        # lineText += str(record[14]).ljust(10) # Rating
+        lineText += " ".ljust(10) # Rating
         lineText += record[10][0:10].ljust(12) # View Date
         if record[3] != '':
             lineText += record[3].ljust(18) # Char2
